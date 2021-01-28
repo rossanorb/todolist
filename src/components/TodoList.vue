@@ -26,10 +26,7 @@ export default {
 
   methods: {
     add: function (task) {
-      console.log('add task')
-      console.log(task)
       this.items.push(task)
-      console.log(this.items)
     }
   }
 }
