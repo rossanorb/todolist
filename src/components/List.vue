@@ -1,36 +1,15 @@
 <template>
-  <div class="table-responsive">
-    <table  class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Título</th>
-          <th>Tempo Estimado</th>
-          <th>Nível</th>
-          <th>Ação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index ) in this.items" :key="index">
-          <td>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" />
-              <label class="form-check-label">
-                  {{item.title}}
-              </label>
-            </div>
-          </td>
-          <td>{{item.time}}</td>
-          <td>
-            <span v-bind:class="{
-              'badge badge-success': item.level == 'Fácil',
-              'badge badge-warning': item.level == 'Médio',
-              'badge badge-danger': item.level == 'Difícil'
-              }">{{item.level}}</span>
-          </td>
-          <td><span class="badge badge-danger delete" @click="remove(index)">x</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="list">
+    <div v-for="(item, index ) in this.items" :key="index">
+      <span class="badge badge-danger delete" @click="remove(index)">x</span>
+      <label>
+          <input type="checkbox" name="">
+          <i></i>
+          <span>
+            {{item.title}} - {{item.time}}h - {{item.level}}
+          </span>
+      </label>
+    </div>
   </div>
 </template>
 <script>
@@ -50,13 +29,88 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-span{
-    &.badge {
+.list{
+    span{
+      position: relative;
+      left: 40px;
+      transition: 0.5s;
+      &.badge {
+        position: relative;
+        left: -8px;
+        top: 34px;
         &.badge-danger{
-            &.delete{
-             cursor: pointer;
-            }
+          &.delete{
+            cursor: pointer;
+          }
         }
-    }
+      }
+
+    &::before
+      {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: #fff;
+          transform: translateY(-50%) scaleX(0);
+          transform-origin: right;
+          transition: transform 0.5s;
+      }
+
+  }
+
+  h2{
+    position: relative;
+    display:block;
+    margin: 0 0;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  label {
+    position: relative;
+    display:block;
+    margin: 5px 20px;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  & input[type="checkbox"]{
+    -webkit-appearance: none;
+  }
+
+  & i {
+    position: absolute;
+    top: 6px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+  }
+
+  & input[type="checkbox"]:checked ~ i {
+      top: 1px;
+      border-top: none;
+      border-right: none;
+      height: 15px;
+      width: 25px;
+      transform: rotate(-45deg);
+  }
+
+  & input[type="checkbox"]:checked ~ span::before {
+      transform: translateY(-50%) scaleX(1);
+      transform-origin: left;
+      transition: transform 0.5s;
+  }
+
+  & input[type="checkbox"]:checked ~ span {
+    color: #154e6b;
+  }
+
 }
+
 </style>

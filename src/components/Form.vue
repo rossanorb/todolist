@@ -3,7 +3,7 @@
 
         <div class="form-group">
             <label for="uname">Título:</label>
-            <input type="text" v-bind:class="{ 'form-control is-invalid': titleIsInvalid, 'form-control': !titleIsInvalid }" id="title" name="title" v-model="title" >
+            <input type="text" ref="title" v-bind:class="{ 'form-control is-invalid': titleIsInvalid, 'form-control': !titleIsInvalid }" id="title" name="title" v-model="title" >
             <div class="valid-feedback">Valid.</div>
             <div class="invalid-feedback">Campo obrigatório.</div>
         </div>
@@ -93,6 +93,8 @@ export default {
         this.time = ''
         this.level = ''
       }
+
+      this.$refs.title.focus()
     }
 
   }
