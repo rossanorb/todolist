@@ -1,5 +1,5 @@
 <template>
-    <form @submit="submit">
+    <form @submit.prevent="submit">
 
         <div class="form-group">
             <label for="uname">Título:</label>
@@ -81,7 +81,7 @@ export default {
       return true
     },
 
-    submit: function (e) {
+    submit: function () {
       if (this.checkForm()) {
         this.$emit('add', {
           title: this.title,
@@ -93,7 +93,6 @@ export default {
         this.time = ''
         this.level = ''
       }
-      e.preventDefault()
     }
 
   }
