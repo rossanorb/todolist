@@ -8,15 +8,22 @@
         <Form @add="add" />
       </div>
     </div>
+    <div class="row">
+      <div class="col col-md-6 offset-md-3">
+        <List :items="this.items" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Form from './Form'
+import List from './List'
 export default {
   name: 'TodoList',
   components: {
-    Form
+    Form,
+    List
   },
   data: function () {
     return {
